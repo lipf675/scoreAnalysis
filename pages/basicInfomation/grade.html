@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>中学生成绩分析系统</title>
+    <link rel="stylesheet" href="../../resourse/layui/css/layui.css">
+    <link rel="stylesheet" href="../../resourse/css/basicInfomation/grade.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            </div>
+        </div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <span class="layui-breadcrumb">
+                    <a href="">首页</a>
+                    <a href="">基本信息</a>
+                    <a><cite>年级</cite></a>
+                </span>
+                <table id="gradeTable" lay-filter="grade">
+                </table>
+            </div>
+        </div>
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>
+    </div>
+    <div id="addGrade" style="display: none;"  class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="addGradeName">名称</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="addGradeName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="addStartTime">入学年月</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="addStartTime">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="addEndTime">毕业时间</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="addEndTime">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="addStatus">年级</label>
+            <div class="layui-input-block">
+                <select id="addStatus">
+                	<option value="">请选择</option>
+                    <option value="1">一年级</option>
+                    <option value="2">二年级</option>
+                    <option value="3">三年级</option>
+                    <option value="0">已毕业</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="addGradeDirector">学年主任</label>
+            <div class="layui-input-block">
+                <select id="addGradeDirector">
+                	<option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="editGrade" style="display: none;"  class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="editGradeName">名称</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="editGradeName">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="editStartTime">入学年月</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="editStartTime">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="editEndTime">毕业时间</label>
+            <div class="layui-input-block">
+                <input type="text" required  lay-verify="required" autocomplete="off" class="layui-input" id="editEndTime">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="editStatus">年级</label>
+            <div class="layui-input-block">
+                <select id="editStatus">
+                	<option value="">请选择</option>
+                    <option value="1">一年级</option>
+                    <option value="2">二年级</option>
+                    <option value="3">三年级</option>
+                    <option value="0">已毕业</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="editGradeDirector">学年主任</label>
+            <div class="layui-input-block">
+                <select id="editGradeDirector">
+                	<option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="lookGrade" style="display: none;"  class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="lookGradeName">名称</label>
+            <div class="layui-input-block">
+                <span id="lookGradeName"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="lookStartTime">入学年月</label>
+            <div class="layui-input-block">
+                <span id="lookStartTime"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="lookEndTime">毕业时间</label>
+            <div class="layui-input-block">
+                <span id="lookEndTime"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="lookStatus">年级</label>
+            <div class="layui-input-block">
+                <span id="lookStatus"></span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" for="lookGradeDirector">学年主任</label>
+            <div class="layui-input-block">
+                <span id="lookGradeDirector"></span>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+            <!-- <button class="layui-btn layui-btn-sm" lay-event="export">导出</button> -->
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="detail" data-id="{{d.id}}">查看</a>
+         {{#  if(d.auth > 2){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="edit" data-id="{{d.id}}">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" data-id="{{d.id}}">删除</a>
+        {{#  } }}
+        <a class="layui-btn layui-btn-xs" lay-event="enter" data-id="{{d.id}}">进入</a>
+        <!-- 这里同样支持 laytpl 语法，如： -->
+  <!--       {{#  if(d.auth > 2){ }}
+            <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
+        {{#  } }} -->
+    </script>
+    <script src="../../resourse/layui/layui.js"></script>
+    <script src="../../resourse/js/basicInfomation/grade.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+label:after{
+	content:" :";
+	font-weight: 400;
+    line-height: 20px;
+}
+#addClass,#editClass,#lookClass{
+	padding-top:20px;
+    width:800px;
+    height:500px;
+}
+fieldset .layui-form-item{
+	width:50%;
+	float: left;
+	clear:none;
+}
+.layui-form-item span{
+	line-height:36px
+}

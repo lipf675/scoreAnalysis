@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>中学生成绩分析系统</title>
+    <link rel="stylesheet" href="../../resourse/layui/css/layui.css">
+    <link rel="stylesheet" href="../../resourse/css/basicInfomation/student.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+        </div>
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            </div>
+        </div>
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">
+                <span class="layui-breadcrumb">
+                    <a href="">首页</a>
+                    <a href="">用户管理</a>
+                    <a><cite>学生管理</cite></a>
+                </span>
+                <table id="studentTable" lay-filter="student">
+                </table>
+            </div>
+        </div>
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
+        </div>
+    </div>
+    <div id="addStudent" style="display: none;"  class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+	            <input  type="text" required  lay-verify="required" placeholder="请输入学生姓名" autocomplete="off" class="layui-input" id="addStudentName">
+	        </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="addClassId" class="layui-form-label">班级</label>
+            <div class="layui-input-block">
+            	<select id="addClassId">
+	                <option value="">否</option>
+	            </select>
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label for="addStudentNum" class="layui-form-label">学号</label>
+            <div class="layui-input-block">
+            	<input  type="text" required  lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input" id="addStudentNum">
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block" id="addSex">
+            	<input type="radio" name="sex" value="男" title="男">
+      			<input type="radio" name="sex" value="女" title="女" checked>
+        	</div>
+        </div>
+    </div>
+    <div id="editStudent" style="display: none;"  class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+	            <input  type="text" required  lay-verify="required" placeholder="请输入学生姓名" autocomplete="off" class="layui-input" id="editStudentName">
+	        </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="editClassId" class="layui-form-label">班级</label>
+            <div class="layui-input-block">
+            	<select id="editClassId">
+	                <option value="">否</option>
+	            </select>
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label for="editStudentNum" class="layui-form-label">学号</label>
+            <div class="layui-input-block">
+            	<input  type="text" required  lay-verify="required" placeholder="请输入学号" autocomplete="off" class="layui-input" id="editStudentNum">
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block" id="editSex">
+            	<input type="radio" name="sex" value="男" title="男">
+      			<input type="radio" name="sex" value="女" title="女" checked>
+        	</div>
+        </div>
+    </div>
+    <div id="lookStudent" style="display: none;"  class="layui-form">
+    	<div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+	            <span id="lookStudentName"></span>
+	        </div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">班级</label>
+            <div class="layui-input-block">
+            	<span id="lookClassId"></span>
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">学号</label>
+            <div class="layui-input-block">
+            	<span id="lookStudentNum"></span>
+        	</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+            	<span id="lookSex"></span>
+        	</div>
+        </div>
+    </div>
+    <div id="changeclass" style="display: none;"  class="layui-form">
+    	<div class="layui-form-item">
+            <label for="changeclassid" class="layui-form-label">班级</label>
+            <div class="layui-input-block">
+            	<select id="changeclassid">
+	                <option value="">否</option>
+	            </select>
+        	</div>
+        </div>
+    </div>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+            <!-- <button class="layui-btn layui-btn-sm" lay-event="export">导出</button> -->
+        </div>
+    </script>
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="detail" data-id="{{d.id}}">查看</a>
+
+        {{#  if(d.auth > 2){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="edit" data-id="{{d.id}}">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" data-id="{{d.id}}">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="changeclass" data-id="{{d.id}}">转班</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="outschool" data-id="{{d.id}}">退学</a>
+        {{#  } }}
+  
+    </script>
+    <script src="../../resourse/layui/layui.js"></script>
+    <script src="../../resourse/js/basicInfomation/student.js"></script>
+</body>
+
+</html>

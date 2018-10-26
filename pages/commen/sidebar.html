@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ul class="layui-nav layui-nav-tree" lay-filter="sidebar">
+        <li class="layui-nav-item layui-nav-itemed">
+            <a class="" href="javascript:;">基本信息</a>
+            <dl class="layui-nav-child">
+                <dd><a href="../basicInfomation/grade.html">学年管理</a></dd>
+                <dd><a href="../basicInfomation/class.html">班级管理</a></dd>
+                <dd><a href="javascript:;">考试管理</a></dd>
+                <dd><a href="../basicInfomation/subject.html">科目管理</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">成绩录入</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">成绩录入</a></dd>
+                <!-- <dd><a href="javascript:;">成绩分析</a></dd> -->
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">成绩分析</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">成绩分析</a></dd>
+                <dd><a href="javascript:;">成绩分析</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">用户管理</a>
+            <dl class="layui-nav-child">
+                <dd><a href="../user/user.html">教师管理</a></dd>
+            </dl>
+        </li>
+    </ul>
+</body>
+    <script>
+        layui.use(['element','jquery'], function() {
+            var element = layui.element,
+                $=layui.jquery;
+            $('.layui-nav-item').click(function(){
+                $('.layui-nav-item').removeClass('layui-nav-itemed');
+                $(this).addClass('layui-nav-itemed');
+            });
+        })
+    </script>
+</html>
